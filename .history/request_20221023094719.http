@@ -1,0 +1,24 @@
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "Khanhb1909929",
+  "password": "khanhnguyn1234567"
+}
+
+###
+
+GET http://localhost:5000/api/course
+Content-Type: application/json
+
+###
+
+PUT http://localhost:5000/api/course/6352d42b5d2ce605d0ff1d45
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzUyN2Y0NWZkY2VlNWY4OTFkYzYyNzUiLCJpYXQiOjE2NjY0OTMwOTF9.dAvGuOC_4RjddcLIGurqJi-dWz9qICpz7pZTaojan6Y
+
+{
+  "title": "hoc vue",
+
+  "link": "vue.org"
+}

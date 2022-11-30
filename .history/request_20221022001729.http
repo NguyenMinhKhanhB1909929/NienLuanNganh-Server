@@ -1,0 +1,8 @@
+POST http://localhost:5000/api/course
+Content-Type: application/json
+
+{
+  "title": "Hoc react",
+  "img": "hinh anh hoc react",
+  "link": "link hoc react"
+}
