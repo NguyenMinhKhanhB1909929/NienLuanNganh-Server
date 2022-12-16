@@ -23,6 +23,9 @@ const CourseSchema = new Schema({
   imgUrl: {
     type: String,
   },
+  lessons: {
+    type: Array,
+  },
 });
 
 module.exports = mongoose.model("courses", CourseSchema);

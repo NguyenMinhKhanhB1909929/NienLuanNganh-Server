@@ -6,6 +6,7 @@ const uploadSchema = new Schema({
   url: String,
   cloudinary_id: String,
   desc: String,
+  titleLesson: String,
 });
 
 module.exports = mongoose.model("upload", uploadSchema);

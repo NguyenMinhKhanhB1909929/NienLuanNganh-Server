@@ -23,6 +23,9 @@ const UserSchema = new Schema({
   fullname: {
     type: String,
   },
+  myCourses: {
+    type: Array,
+  },
 });
 
 module.exports = mongoose.model("users", UserSchema);

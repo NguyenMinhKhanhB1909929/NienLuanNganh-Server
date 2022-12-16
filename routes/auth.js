@@ -5,23 +5,18 @@ const jwt = require("jsonwebtoken");
 const verifyToken = require("../middleware/auth");
 
 const User = require("../models/User");
+const {
+  addCourseToUser,
+  changePassword,
+  registerUser,
+  changeInfo,
+  getAllUser,
+} = require("../controllers/user");
 
 // @route GET api/auth/all
 // @desc Check login
 // @access Public
-router.get("/all", async (req, res) => {
-  try {
-    const user = await User.find().select("-password");
-    res.json({
-      success: true,
-      message: "Get all user successfully",
-      user: user,
-    });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ success: false, message: "Internal server error" });
-  }
-});
+router.get("/all", getAllUser);
 
 // @route GET api/auth
 // @desc Check login
@@ -43,51 +38,10 @@ router.get("/", verifyToken, async (req, res) => {
 // @route POST api/auth/resigter
 // @desc Register user
 // @access Public
-router.post("/register", async (req, res) => {
-  const { username, password, fullname } = req.body;
+router.post("/register", registerUser);
 
-  // Simple validation
-  if (!username || !password)
-    return res
-      .status(400)
-      .json({ success: false, message: "Missing username and/or password" });
-  try {
-    const user = await User.findOne({ username });
-
-    if (user)
-      return res
-        .status(400)
-        .json({ success: false, message: "Username already" });
-
-    const hashedPassword = await argon2.hash(password);
-    const rule = "user";
-    const newUser = new User({
-      fullname,
-      username,
-      password: hashedPassword,
-      rule,
-      email: "abc",
-      phone: "0784432140",
-    });
-    await newUser.save();
-
-    // Return token
-    const accessToken = jwt.sign(
-      { userId: newUser._id },
-      process.env.ACCESS_TOKEN_SECRET
-    );
-
-    res.json({
-      success: true,
-      message: "User created successfully",
-      accessToken,
-    });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ success: false, message: "Internal server error" });
-  }
-});
-
+router.put("/changePassword", verifyToken, changePassword);
+router.put("/changeInfo", verifyToken, changeInfo);
 // @route POST api/auth/login
 // @desc Login user
 // @access Public
@@ -128,5 +82,7 @@ router.post("/login", async (req, res) => {
     res.status(500).json({ success: false, message: "Internal server error" });
   }
 });
+
+router.post("/:id", verifyToken, addCourseToUser);
 
 module.exports = router;

@@ -2,8 +2,8 @@ POST http://localhost:5000/api/auth/login
 Content-Type: application/json
 
 {
-  "username": "Khanhb1909929",
-  "password": "khanhnguyn1234567"
+  "username": "aa",
+  "password": "khanhnguyn123456"
 }
 
 ###
@@ -40,3 +40,37 @@ Content-Type: application/json
   "path": "uploads\\1.png",
   "size": 26253
 }
+
+###
+POST http://localhost:5000/api/auth/asdf
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzUyN2Y0NWZkY2VlNWY4OTFkYzYyNzUiLCJpYXQiOjE2NjY0OTMwOTF9.dAvGuOC_4RjddcLIGurqJi-dWz9qICpz7pZTaojan6Y
+
+###
+PUT http://localhost:5000/api/auth/changePassword
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzY2MWQzYjIzZTNlZDdhZWM3OWRlODMiLCJpYXQiOjE2NzA1NzgzMDB9.ENSnzfCbgGeDEZ29x1yMmSRGRkn2Zb3qbQxlWwellz0
+
+{
+  "oldPassword": "khanhnguyn123456",
+  "newPassword": "khanhnguyn1234567",
+  "reNewPassword": "khanhnguyn1234567"
+}
+
+###
+PUT http://localhost:5000/api/auth/changeInfo
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Mzk0Y2Q1ZTE4NGQ3ZmMxOTBmOTUyY2YiLCJpYXQiOjE2NzA2OTY5OTl9.IvPdezSmUMTujlLberbJ_73x31ukHnWlpdmKcL8zjDU
+
+{
+  "fullname": "Nguyen Minh Khanh",
+  "email": "khanh@gmail.com",
+  "phone": "0784546"
+}
+
+###
+GET http://localhost:5000/api/course/myCourse
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzY2MWQzYjIzZTNlZDdhZWM3OWRlODMiLCJpYXQiOjE2NzA3NTU5MDl9.tg-lA8TylA4_FVsb82F4XD-TKps9i9Nqk0Fv4FXoTSc
+
+

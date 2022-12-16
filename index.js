@@ -7,8 +7,8 @@ const paypal = require("paypal-rest-sdk");
 
 const authRouter = require("./routes/auth");
 const courseRouter = require("./routes/course");
-const uploadController = require("./controllers/upload");
-const storage = require("./lib/multer");
+const lessonRouter = require("./routes/lesson");
+const chapterRouter = require("./routes/chapter");
 
 const connectDB = async () => {
   try {
@@ -35,16 +35,15 @@ paypal.configure({
 });
 
 app.post("/pay", (req, res) => {
-  const { title, desc, cost } = req.body;
-
+  const { title, desc, cost, id, lessonId } = req.body;
   const create_payment_json = {
     intent: "sale",
     payer: {
       payment_method: "paypal",
     },
     redirect_urls: {
-      return_url: `http://localhost:3000/payment/${cost}`,
-      cancel_url: "http://localhost:3000/",
+      return_url: `http://localhost:3000/paySuccess/${cost}/${id}/${lessonId}`,
+      cancel_url: "http://localhost:3000/payFail",
     },
     transactions: [
       {
@@ -104,7 +103,6 @@ app.get("/success/:cost", (req, res) => {
         console.log(error.response);
         throw error;
       } else {
-        // console.log(JSON.stringify(payment));
         res.send({ success: true, message: "thanh toan thanh cong" });
       }
     }
@@ -119,9 +117,9 @@ app.get("/cancel", (req, res) =>
 
 app.use("/api/auth", authRouter);
 app.use("/api/course", courseRouter);
+app.use("/api/chapter", chapterRouter);
+app.use("/api/lesson", lessonRouter);
 
 const PORT = 5000;
-
-app.post("/uploads", storage.single("file"), uploadController.uploadImage);
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
